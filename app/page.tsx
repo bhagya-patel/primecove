@@ -1,7 +1,7 @@
-"use client"
-
-import  from "../assets/js/script"
-
-export default function SyntheticV0PageForDeployment() {
-  return < />
+export default function Home() {
+  return (
+    <main>
+      <h1>PrimeCove</h1>
+    </main>
+  )
 }
