@@ -1,5 +1,5 @@
 {
-  "buildCommand": "next build",
-  "outputDirectory": ".next",
-  "framework": "nextjs"
+  "buildCommand": "echo 'No build step needed'",
+  "outputDirectory": ".",
+  "framework": null
 }
