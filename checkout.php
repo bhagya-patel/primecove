@@ -485,11 +485,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             input.style.borderColor = '#ced4da';
                         }
                     });
+                    // Validate card number: must be 16 digits
+                    const cardNumInput = document.querySelector('#card-payment input[placeholder]');
+                    const cardDigits = cardNumInput.value.replace(/\s/g, '');
+                    if (!/^\d{16}$/.test(cardDigits)) {
+                        isValid = false;
+                        cardNumInput.style.borderColor = '#dc3545';
+                        cardNumInput.placeholder = 'Enter 16-digit card number';
+                    }
+                    // Validate expiry MM/YY
+                    const expiryInput = document.querySelector('#card-payment input[placeholder="MM/YY"]');
+                    if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(expiryInput.value.trim())) {
+                        isValid = false;
+                        expiryInput.style.borderColor = '#dc3545';
+                    }
                 } else if (activeTab === 'upi-tab') {
                     const input = document.querySelector('#upi-payment input');
-                    if (!input.value.trim() || !input.value.includes('@')) {
+                    // UPI format: localpart@bankcode
+                    if (!/^[a-zA-Z0-9.\-_]{2,}@[a-zA-Z]{2,}$/.test(input.value.trim())) {
                         isValid = false;
                         input.style.borderColor = '#dc3545';
+                        input.placeholder = 'Invalid UPI ID (e.g. name@okaxis)';
                     } else {
                         input.style.borderColor = '#ced4da';
                     }
